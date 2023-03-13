@@ -2,6 +2,7 @@ package school.sptech.ensine.me.models;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 
 public class Professor extends Usuario{
@@ -9,17 +10,6 @@ public class Professor extends Usuario{
     private List<String> diasTrabalho;
     private List<String> competencias;
 
-    public Professor(String nome, String email, String senha, String dataNasc, String descricao, List<String> competencias) {
-        super(nome, email, senha, dataNasc);
-        this.descricao = descricao;
-        this.competencias = competencias;
-    }
-
-    public Professor(String nome, String email, String senha, String dataNasc, List<String> competencias) {
-        super(nome, email, senha, dataNasc);
-        this.competencias = competencias;
-        this.descricao = "Este professor não adicionou uma descrição";
-    }
 
     public Professor(String nome, String email, String senha, String dataNasc, String descricao, List<String> diasTrabalho, List<String> competencias) {
         super(nome, email, senha, dataNasc);
@@ -27,6 +17,7 @@ public class Professor extends Usuario{
         this.diasTrabalho = diasTrabalho;
         this.competencias = competencias;
     }
+
 
     public String getDescricao() {
         return descricao;

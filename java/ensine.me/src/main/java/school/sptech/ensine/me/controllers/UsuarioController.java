@@ -26,8 +26,6 @@ public class UsuarioController {
         List<String> materias = new ArrayList<>();
         materias.add("Matematica");
         materias.add("Portugues");
-        usuarios.add(new Professor("Astolfo", "astolfo@gmail.com", "astolfo123",
-                "04/06/1987", "gosto de batata", materias));
         usuarios.add(new Aluno("Cleiton", "cleitinho@gmail.com", "clei123",
                 "10/04/1997",    "João Pinheiro"));
     }
@@ -106,7 +104,7 @@ public class UsuarioController {
         }
         for (String dias:
              professor.getDiasTrabalho()) {
-            if(dias.length() != 11){
+            if(dias.length() != 16){
                 return "Cadastro não efetuado! Insira uma data/hora válida (dd/mm/yyyy hh:MM)";
             }
         }
@@ -117,7 +115,7 @@ public class UsuarioController {
             }
         }
         usuarios.add(professor);
-        return String.format("Aluno %s cadastrado com sucesso. id: %d", professor.getNome(), professor.getId());
+        return String.format("Professor %s cadastrado com sucesso. id: %d", professor.getNome(), professor.getId());
     }
     @GetMapping("aulas")
     public List<Aula> listarAulas(){
@@ -129,7 +127,7 @@ public class UsuarioController {
             return "Cadastro não efetuado! Email deve possuir mais de 8 caracteres";
         }else if(professorAulaDTO.getSenha().length() <= 7){
             return "Cadastro não efetuado! Senha deve possuir mais de 7 caracteres";
-        }else if(professorAulaDTO.getDataHora().length() != 11){
+        }else if(professorAulaDTO.getDataHora().length() != 16){
             return "Cadastro não efetuado! Insira uma data/hora válida (dd/mm/yyyy hh:MM)";
         }else if(professorAulaDTO.getMateria().length() <= 5){
             return "Cadastro não efetuado! Materia deve possuir mais de 5 caracteres";
@@ -146,7 +144,9 @@ public class UsuarioController {
                         for (String materia:
                              ((Professor) u).getCompetencias()) {
                             if (professorAulaDTO.getMateria().equals(materia)){
-
+                                Aula aula = new Aula((Professor) u, professorAulaDTO.getTitulo(),professorAulaDTO.getMateria(),
+                                        professorAulaDTO.getDataHora(),professorAulaDTO.getQtdAlunos());
+                                aulas.add(aula);
                                 return "Aula cadastrada com sucesso!";
                             }
                         }

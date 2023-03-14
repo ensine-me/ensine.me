@@ -1,14 +1,13 @@
 package school.sptech.ensine.me.controllers;
 
 import org.springframework.web.bind.annotation.*;
-import school.sptech.ensine.me.controllers.id.IdControllerUsuario;
 import school.sptech.ensine.me.models.Aluno;
 import school.sptech.ensine.me.models.Aula;
 import school.sptech.ensine.me.models.Professor;
 import school.sptech.ensine.me.models.Usuario;
+import school.sptech.ensine.me.models.dto.AlunoAulaDTO;
 import school.sptech.ensine.me.models.dto.ProfessorAulaDTO;
 
-import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -135,6 +134,8 @@ public class UsuarioController {
             return "Cadastro não efetuado! Titulo deve possuir mais de 5 caracteres";
         }else if(professorAulaDTO.getQtdAlunos() < 1){
             return "Cadastro não efetuado! Quantidade minima de alunos é 1";
+        }else if(professorAulaDTO.getQtdAlunos() < 20){
+            return "Cadastro não efetuado! Quantidade maxima de alunos é 20";
         }
         for (Usuario u:
              usuarios) {
@@ -161,9 +162,44 @@ public class UsuarioController {
     }
 
     @PatchMapping("aulas/{id}")
-    public String entrarNaAula(){
+    public String entrarNaAula(@RequestBody AlunoAulaDTO alunoAulaDTO, @PathVariable int id){
+        if (alunoAulaDTO.getEmail().length() <= 8){
+            return "Cadastro não efetuado! Email deve possuir mais de 8 caracteres";
+        }else if(alunoAulaDTO.getSenha().length() <= 7){
+            return "Cadastro não efetuado! Senha deve possuir mais de 7 caracteres";
+        }
+        for (Aula a:
+             aulas) {
+            if(a.getId() == id){
+                for (Usuario u:
+                     usuarios) {
+                    if(u instanceof Aluno){
+                        if (u.getEmail().equals(alunoAulaDTO.getEmail())){
+                            if (u.getSenha().equals(alunoAulaDTO.getSenha())){
+                                if (a.getQtdAlunos() <= a.listarAlunosCompleto().size()){
+                                    return "Cadastro não efetuado! Limite de alunos atingido para esta aula";
+                                }else{
+                                    for (Aluno a2:
+                                            a.listarAlunosCompleto()) {
+                                        if(a2.getEmail().equals(u.getEmail())){
+                                            return "Cadastro não efetuado! Aluno já cadastrado na aula";
+                                        }
+                                    }
+                                    a.addAluno((Aluno) u);
+                                    return "Aluno cadastrado na aula com sucesso!";
+                                }
 
-        return "";
+
+                            }else{
+                                return "Cadastro não efetuado! email e/ou senha incorretos";
+                            }
+                        }
+                    }
+                }
+                return "Cadastro não efetuado! email e/ou senha incorretos";
+            }
+        }
+        return "Cadastro não efetuado! Id de aula não encontrado";
     }
 
 }

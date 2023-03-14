@@ -1,6 +1,8 @@
 package school.sptech.ensine.me.models;
 
 import school.sptech.ensine.me.controllers.id.IdControllerAula;
+import school.sptech.ensine.me.models.dto.AlunoSimplesDTO;
+import school.sptech.ensine.me.models.dto.ProfessorSimplesDTO;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -24,8 +26,9 @@ public class Aula {
         alunos = new ArrayList<>();
     }
 
-    public Professor getProfessor() {
-        return professor;
+    public ProfessorSimplesDTO getProfessor() {
+        ProfessorSimplesDTO professorDTO = new ProfessorSimplesDTO(professor);
+        return professorDTO;
     }
 
     public void setProfessor(Professor professor) {
@@ -64,7 +67,16 @@ public class Aula {
         this.qtdAlunos = qtdAlunos;
     }
 
-    public List<Aluno> getAlunos() {
+    public List<AlunoSimplesDTO> getAlunos() {
+        List<AlunoSimplesDTO> alunoSimplesDTO = new ArrayList<>();
+        for (Aluno a:
+             alunos) {
+            alunoSimplesDTO.add(new AlunoSimplesDTO(a));
+        }
+        return alunoSimplesDTO;
+    }
+
+    public List<Aluno> listarAlunosCompleto() {
         return alunos;
     }
 
@@ -78,5 +90,11 @@ public class Aula {
 
     public void setId(int id) {
         this.id = id;
+    }
+
+    public void addAluno(Aluno aluno){
+        if (aluno != null){
+            alunos.add(aluno);
+        }
     }
 }

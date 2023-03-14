@@ -1,20 +1,19 @@
 package school.sptech.ensine.me.models;
 
 import school.sptech.ensine.me.controllers.id.IdControllerAula;
-import school.sptech.ensine.me.models.dto.AlunoSimplesDTO;
-import school.sptech.ensine.me.models.dto.ProfessorSimplesDTO;
+import school.sptech.ensine.me.models.dto.UsuarioSimplesDTO;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class Aula {
+    private int id;
     private Professor professor;
     private String titulo;
     private String materia;
     private String dataHora;
     private int qtdAlunos;
     private List<Aluno> alunos;
-    private int id;
 
     public Aula(Professor professor, String titulo, String materia, String dataHora, int qtdAlunos) {
         this.professor = professor;
@@ -26,8 +25,15 @@ public class Aula {
         alunos = new ArrayList<>();
     }
 
-    public ProfessorSimplesDTO getProfessor() {
-        ProfessorSimplesDTO professorDTO = new ProfessorSimplesDTO(professor);
+
+    public int getId() {
+        return id;
+    }
+    public void setId(int id) {
+        this.id = id;
+    }
+    public UsuarioSimplesDTO getProfessor() {
+        UsuarioSimplesDTO professorDTO = new UsuarioSimplesDTO(professor);
         return professorDTO;
     }
 
@@ -67,13 +73,13 @@ public class Aula {
         this.qtdAlunos = qtdAlunos;
     }
 
-    public List<AlunoSimplesDTO> getAlunos() {
-        List<AlunoSimplesDTO> alunoSimplesDTO = new ArrayList<>();
+    public List<UsuarioSimplesDTO> getAlunos() {
+        List<UsuarioSimplesDTO> usuarioSimplesDTO = new ArrayList<>();
         for (Aluno a:
              alunos) {
-            alunoSimplesDTO.add(new AlunoSimplesDTO(a));
+            usuarioSimplesDTO.add(new UsuarioSimplesDTO(a));
         }
-        return alunoSimplesDTO;
+        return usuarioSimplesDTO;
     }
 
     public List<Aluno> listarAlunosCompleto() {
@@ -82,14 +88,6 @@ public class Aula {
 
     public void setAlunos(List<Aluno> alunos) {
         this.alunos = alunos;
-    }
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
     }
 
     public void addAluno(Aluno aluno){

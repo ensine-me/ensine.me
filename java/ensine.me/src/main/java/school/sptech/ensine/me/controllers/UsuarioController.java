@@ -134,7 +134,7 @@ public class UsuarioController {
             return "Cadastro não efetuado! Titulo deve possuir mais de 5 caracteres";
         }else if(professorAulaDTO.getQtdAlunos() < 1){
             return "Cadastro não efetuado! Quantidade minima de alunos é 1";
-        }else if(professorAulaDTO.getQtdAlunos() < 20){
+        }else if(professorAulaDTO.getQtdAlunos() > 20){
             return "Cadastro não efetuado! Quantidade maxima de alunos é 20";
         }
         for (Usuario u:

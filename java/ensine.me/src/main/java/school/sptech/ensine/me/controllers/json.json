@@ -1,3 +1,4 @@
+//post: localhost:8080/usuarios/alunos
 {
     "nome": "Jorge Aguiar",
     "email": "jorjinho@gmail.com",
@@ -28,6 +29,7 @@
 "dataNasc": "01/12/2001",
 "instituicao": "Irene Branco"
 }
+        //post: localhost:8080/usuarios/professores
 {
     "nome": "Vagner Sampaio",
     "email": "profvagnersampa@gmail.com",
@@ -43,6 +45,7 @@
         "Fisica"
     ]
 }
+        // post: localhost:8080/usuarios/aulas
 {
   "email": "profvagnersampa@gmail.com",
   "senha": "euamomatematica123",
@@ -51,7 +54,10 @@
   "dataHora": "06/04/2023 12:20" ,
   "qtdAlunos": 3
 }
+        //patch: localhost:8080/usuarios/aulas/1001
 {
-  "email": "",
-  "senha": ""
+  "email": "jorjinho@gmail.com",
+  "senha": "empresta12"
 }
+
+//get: localhost:8080/usuarios/aulas

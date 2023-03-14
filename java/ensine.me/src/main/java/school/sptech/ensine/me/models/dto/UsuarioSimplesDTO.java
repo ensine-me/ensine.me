@@ -1,8 +1,8 @@
 package school.sptech.ensine.me.models.dto;
 
-import school.sptech.ensine.me.models.Aluno;
+import school.sptech.ensine.me.models.Usuario;
 
-public class AlunoSimplesDTO {
+public class UsuarioSimplesDTO {
 
     private int id;
     private String nome;
@@ -32,9 +32,9 @@ public class AlunoSimplesDTO {
         this.email = email;
     }
 
-    public AlunoSimplesDTO(Aluno aluno) {
-        this.id = aluno.getId();
-        this.nome = aluno.getNome();
-        this.email = aluno.getEmail();
+    public UsuarioSimplesDTO(Usuario usuario) {
+        this.id = usuario.getId();
+        this.nome = usuario.getNome();
+        this.email = usuario.getEmail();
     }
 }
